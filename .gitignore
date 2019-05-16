@@ -7,4 +7,6 @@
 .Rhistory
 .docx
 .doc
+# NodeJS
+/node_modules
 

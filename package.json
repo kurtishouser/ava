@@ -1,0 +1,24 @@
+{
+  "name": "ucdavis_ava",
+  "version": "1.0.0",
+  "description": "The UC Davis library, in conjunction with UCSB, other partner organizations, and contributions from the general public, will create a publicly accessible version American Viticultural Areas boundaries.  Using the text descriptions from the ATPF Code of regulations, we will build this data from the official descriptions.  These data will be made freely available.  This dataset will provide wine researchers with an important tool as they examine the scientific, economic and historical aspects of viticulture.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kurtishouser/ava.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kurtishouser/ava/issues"
+  },
+  "homepage": "https://github.com/kurtishouser/ava#readme",
+  "dependencies": {
+    "node-fetch": "^2.5.0",
+    "xml2js": "^0.4.19"
+  }
+}
