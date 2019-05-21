@@ -2,8 +2,10 @@ const fs = require('fs');
 const fetch = require('node-fetch');
 const { parseString } = require('xml2js');
 
-const cfrAppellationsUrl = 'https://www.govinfo.gov/content/pkg/CFR-2018-title27-vol1/xml/CFR-2018-title27-vol1-part9-subpartC.xml';
-const currentCfrData = {};
+const year = 2018;
+const cfrAppellationsUrl = `https://www.govinfo.gov/content/pkg/CFR-${year}-title27-vol1/xml/CFR-${year}-title27-vol1-part9-subpartC.xml`;
+const xmlCfrData = {};
+let lastGeoJsonCfr = 0;
 
 async function fetchXmlDocument(xmlUrl) {
   console.log('Fetching CFR XML document from govinfo.gov (large file!)...');
@@ -20,21 +22,30 @@ function readDirectory(directoryPath) {
     .map(filename => `${directoryPath}/${filename}`);
 }
 
-function compareGeoJsonFiles(filenames) {
+function checkForUpdatedCfrs(filenames) {
   filenames.forEach(filename => {
     const file = fs.readFileSync(filename); 
     const { cfr_index, name, cfr_revision_history } = JSON.parse(file).features[0].properties;
+    const currentCfr = parseInt(cfr_index.substring(2));
 
-    if (cfr_revision_history != currentCfrData[cfr_index].cfr_revision_history) {
-      console.log('Update available for', cfr_index, name,'->',filename);
+    if (currentCfr > lastGeoJsonCfr) lastGeoJsonCfr = currentCfr;
+
+    if (xmlCfrData[cfr_index] && cfr_revision_history != xmlCfrData[cfr_index].cfr_revision_history) {
+      console.log('CFR update available for', cfr_index, name,'->', filename);
     }
-  });
+  }); 
+}
+
+function checkForNewCfrs() {
+  Object.keys(xmlCfrData)
+    .filter(cfr => parseInt(cfr.substring(2)) > lastGeoJsonCfr)
+    .forEach(newCfr => console.log('New CFR available for', newCfr, xmlCfrData[newCfr].name));
 }
 
 async function readLocalTestFile(filename) { // for local testing, async required so it can be used below
-  // file can be downloaded at 
-  // https://www.govinfo.gov/content/pkg/CFR-2018-title27-vol1/xml/CFR-2018-title27-vol1-part9-subpartC.xml
-  return fs.readFileSync('./CFR-2018-title27-vol1-part9-subpartC.xml'); 
+  // XML file can be downloaded at 
+  // https://www.govinfo.gov/app/details/CFR-2018-title27-vol1/CFR-2018-title27-vol1-part9-subpartC
+  return fs.readFileSync(`./CFR-${year}-title27-vol1-part9-subpartC.xml`); 
 }
 
 fetchXmlDocument(cfrAppellationsUrl)
@@ -43,7 +54,9 @@ fetchXmlDocument(cfrAppellationsUrl)
     const { SECTION } = result.CFRGRANULE.SUBPART[0];
 
     for (i = 1; i < SECTION.length; i++) { // i = 1 -> skips 9.21 General
-      currentCfrData[SECTION[i].SECTNO[0].substring(2)] = { // remove '§ ' from beginning
+      const cfrIndex = SECTION[i].SECTNO[0].substring(2); // remove '§ ' from beginning
+
+      xmlCfrData[cfrIndex] = {
         name: SECTION[i].SUBJECT[0].substring(0, SECTION[i].SUBJECT[0].length - 1), // remove '.' from end
         cfr_revision_history: SECTION[i].CITA
           ? SECTION[i].CITA[0]
@@ -52,7 +65,8 @@ fetchXmlDocument(cfrAppellationsUrl)
     }
   }))
   .then(() => {
-    compareGeoJsonFiles(readDirectory('./avas'));
-    compareGeoJsonFiles(readDirectory('./tbd'));
+    checkForUpdatedCfrs(readDirectory('./avas'));
+    checkForUpdatedCfrs(readDirectory('./tbd'));
+    checkForNewCfrs();
   })
-  .catch(e => e);
+  .catch(e => console.log(e));
