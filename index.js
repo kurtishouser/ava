@@ -20,19 +20,24 @@ function parseXmlDocument(xml) {
       if (err !== null) {
         reject(err);
       } else {
-        const { SECTION } = result.CFRGRANULE.SUBPART[0];
-  
-        for (i = 1; i < SECTION.length; i++) { // i = 1 -> skips 9.21 General
-          const cfrIndex = SECTION[i].SECTNO[0].substring(2); // remove '§ ' from beginning
+        try {
+          const { SECTION } = result.CFRGRANULE.SUBPART[0];
     
-          xmlCfrData[cfrIndex] = {
-            name: SECTION[i].SUBJECT[0].substring(0, SECTION[i].SUBJECT[0].length - 1), // remove '.' from end
-            cfr_revision_history: SECTION[i].CITA
-              ? SECTION[i].CITA[0]
-              : SECTION[i].SECAUTH[0], // used by 9.126 Santa Clara Valley
-          };
+          for (i = 1; i < SECTION.length; i++) { // i = 1 -> skips 9.21 General
+            const cfrIndex = SECTION[i].SECTNO[0].substring(2); // remove '§ ' from beginning
+
+            xmlCfrData[cfrIndex] = {
+              name: SECTION[i].SUBJECT[0].substring(0, SECTION[i].SUBJECT[0].length - 1), // remove '.' from end
+              cfr_revision_history: SECTION[i].CITA
+                ? SECTION[i].CITA[0]
+                : SECTION[i].SECAUTH[0], // used by 9.126 Santa Clara Valley
+            };
+          }
+          resolve();
         }
-        resolve();
+        catch(e) {
+          reject('Unable to parse XML document, unsupported structure.');
+        }
       }
     });
   });
