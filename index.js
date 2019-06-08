@@ -2,8 +2,6 @@ const fs = require('fs');
 const fetch = require('node-fetch');
 const { parseString } = require('xml2js');
 
-const year = 2018;
-const cfrAppellationsUrl = `https://www.govinfo.gov/content/pkg/CFR-${year}-title27-vol1/xml/CFR-${year}-title27-vol1-part9-subpartC.xml`;
 const xmlCfrData = {};
 let lastGeoJsonCfr = 0;
 
@@ -73,18 +71,28 @@ function checkForNewCfrs() {
     .forEach(newCfr => console.log('New CFR available for', newCfr, xmlCfrData[newCfr].name));
 }
 
-async function readLocalTestFile(filename) { // for local testing, async required so it can be used below
-  // XML file can be downloaded at 
-  // https://www.govinfo.gov/app/details/CFR-2018-title27-vol1/CFR-2018-title27-vol1-part9-subpartC
-  return fs.readFileSync(`./CFR-${year}-title27-vol1-part9-subpartC.xml`); 
+// for local testing, async required so it can be used below
+// async function readLocalTestFile(filename) {
+//   // XML file can be downloaded at
+//   // https://www.govinfo.gov/app/details/CFR-2018-title27-vol1/CFR-2018-title27-vol1-part9-subpartC
+//   return fs.readFileSync(`./CFR-${year}-title27-vol1-part9-subpartC.xml`);
+// }
+
+const year = process.argv[2];
+
+if (year && year.length === 4 && Number.isInteger(Number(year))) {
+  const xmlUrl = `https://www.govinfo.gov/content/pkg/CFR-${year}-title27-vol1/xml/CFR-${year}-title27-vol1-part9-subpartC.xml`;
+
+  // readLocalTestFile() // for local testing
+  fetchXmlDocument(xmlUrl)
+    .then((xml) => parseXmlDocument(xml))
+    .then(() => {
+      checkForUpdatedCfrs(readDirectory('./avas'));
+      checkForUpdatedCfrs(readDirectory('./tbd'));
+      checkForNewCfrs();
+    })
+    .catch(e => console.log(e));
+} else {
+  console.log('Four-digit year required -> node index ####');
 }
 
-// readLocalTestFile() // for local testing
-fetchXmlDocument(cfrAppellationsUrl)
-  .then((xml) => parseXmlDocument(xml))
-  .then(() => {
-    checkForUpdatedCfrs(readDirectory('./avas'));
-    checkForUpdatedCfrs(readDirectory('./tbd'));
-    checkForNewCfrs();
-  })
-  .catch(e => console.log(e));
