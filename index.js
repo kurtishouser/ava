@@ -11,7 +11,9 @@ async function fetchXmlDocument(xmlUrl) {
   console.log('Fetching CFR XML document from govinfo.gov (large file!)...');
   const response = await fetch(xmlUrl);
 
-  return response.text();
+  return response.status === 200
+    ? response.text()
+    : Promise.reject(`Retrieval failed with HTTP status code ${response.status}.`);
 }
 
 function parseXmlDocument(xml) {
