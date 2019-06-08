@@ -18,7 +18,7 @@ function parseXmlDocument(xml) {
   return new Promise((resolve, reject) => {
     parseString(xml, (err, result) => {
       if (err !== null) {
-        reject(err);
+        reject('Error parsing XML document.');
       } else {
         try {
           const { SECTION } = result.CFRGRANULE.SUBPART[0];
