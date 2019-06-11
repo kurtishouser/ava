@@ -72,10 +72,15 @@ function checkForNewCfrs() {
 }
 
 // for local testing, async required so it can be used below
-// async function readLocalTestFile(filename) {
+// async function readLocalTestFile(year) {
 //   // XML file can be downloaded at
 //   // https://www.govinfo.gov/app/details/CFR-2018-title27-vol1/CFR-2018-title27-vol1-part9-subpartC
-//   return fs.readFileSync(`./CFR-${year}-title27-vol1-part9-subpartC.xml`);
+//   try {
+//     return fs.readFileSync(`./CFR-${year}-title27-vol1-part9-subpartC.xml`);
+//   }
+//   catch(e) {
+//     return Promise.reject('Unable to read file.');
+//   }
 // }
 
 const year = process.argv[2];
@@ -83,7 +88,7 @@ const year = process.argv[2];
 if (year && year.length === 4 && Number.isInteger(Number(year))) {
   const xmlUrl = `https://www.govinfo.gov/content/pkg/CFR-${year}-title27-vol1/xml/CFR-${year}-title27-vol1-part9-subpartC.xml`;
 
-  // readLocalTestFile() // for local testing
+  // readLocalTestFile(year) // for local testing
   fetchXmlDocument(xmlUrl)
     .then((xml) => parseXmlDocument(xml))
     .then(() => {
