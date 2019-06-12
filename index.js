@@ -20,23 +20,24 @@ async function fetchXmlDocument(xmlUrl) {
     : Promise.reject(`Retrieval failed with HTTP status code ${response.status}.`);
 }
 
-function parseXmlDocument(xml) {
+function parseCfrXml(xml) {
   return new Promise((resolve, reject) => {
     parser.parseString(xml, (err, result) => {
       if (err !== null) {
         reject('Error parsing XML document.');
       } else {
         try {
-          const { SECTION } = result.CFRGRANULE.SUBPART[0];
+          // slice(1) removes CFR 9.21 General
+          const avas = result.CFRGRANULE.SUBPART[0].SECTION.slice(1);
     
-          for (i = 1; i < SECTION.length; i++) { // i = 1 -> skips 9.21 General
-            const cfrIndex = SECTION[i].SECTNO[0].substring(2); // remove '§ ' from beginning
+          for (i = 0; i < avas.length; i++) {
+            const cfrIndex = avas[i].SECTNO[0].substring(2); // remove '§ ' from beginning
 
             xmlCfrData[cfrIndex] = {
-              name: SECTION[i].SUBJECT[0].substring(0, SECTION[i].SUBJECT[0].length - 1), // remove '.' from end
-              cfr_revision_history: SECTION[i].CITA
-                ? SECTION[i].CITA[0]
-                : SECTION[i].SECAUTH[0], // used by 9.126 Santa Clara Valley
+              name: avas[i].SUBJECT[0].substring(0, avas[i].SUBJECT[0].length - 1), // remove '.' from end
+              cfr_revision_history: avas[i].CITA
+                ? avas[i].CITA[0]
+                : avas[i].SECAUTH[0], // used by 9.126 Santa Clara Valley
             };
           }
           resolve();
@@ -140,7 +141,7 @@ if (!year) {
 
   // readLocalTestFile(`./CFR-${year}-title27-vol1-part9-subpartC.xml`) // for local testing
   fetchXmlDocument(xmlUrl)
-    .then((xml) => parseXmlDocument(xml))
+    .then((xml) => parseCfrXml(xml))
     .then(() => {
       checkForUpdatedCfrs(readDirectory('./avas'));
       checkForUpdatedCfrs(readDirectory('./tbd'));
