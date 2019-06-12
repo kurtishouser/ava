@@ -1,6 +1,12 @@
 const fs = require('fs');
 const fetch = require('node-fetch');
-const { parseString } = require('xml2js');
+const xml2js = require('xml2js');
+
+const parser = xml2js.Parser({
+  attrkey: "attr",
+  charkey: "text",
+  trim: true,
+});
 
 const xmlCfrData = {};
 let lastGeoJsonCfr = 0;
@@ -16,7 +22,7 @@ async function fetchXmlDocument(xmlUrl) {
 
 function parseXmlDocument(xml) {
   return new Promise((resolve, reject) => {
-    parseString(xml, (err, result) => {
+    parser.parseString(xml, (err, result) => {
       if (err !== null) {
         reject('Error parsing XML document.');
       } else {
@@ -32,6 +38,36 @@ function parseXmlDocument(xml) {
                 ? SECTION[i].CITA[0]
                 : SECTION[i].SECAUTH[0], // used by 9.126 Santa Clara Valley
             };
+          }
+          resolve();
+        }
+        catch(e) {
+          reject('Unable to parse XML document, unsupported structure.');
+        }
+      }
+    });
+  });
+}
+
+function parseEcfrXml(xml) {
+  return new Promise((resolve, reject) => {
+    parser.parseString(xml, (err, result) => {
+      if (err !== null) {
+        reject('Error parsing XML document.');
+      } else {
+        try {
+          // slice(1) removes CFR 9.21 General
+          const avas = result.DLPSTEXTCLASS.TEXT[0].BODY[0].ECFRBRWS[0].DIV1[0].DIV3[0].DIV4[0].DIV5[6].DIV6[2].DIV8.slice(1);
+  
+          for (i = 0; i < avas.length; i++) {
+            const cfrIndex = avas[i].attr.N.substring(2); // remove '§ ' from beginning
+            const head = avas[i].HEAD[0].split('   ');
+            const name = head[1].substring(0, head[1].length - 1); // remove trailing '.'
+            const cfr_revision_history = avas[i].CITA
+              ? avas[i].CITA[0].text
+              : avas[i].SECAUTH[0].text; // used by 9.126 Santa Clara Valley
+              
+            xmlCfrData[cfrIndex] = { name, cfr_revision_history };
           }
           resolve();
         }
@@ -85,7 +121,18 @@ function checkForNewCfrs() {
 
 const year = process.argv[2];
 
-if (year && year.length === 4 && Number.isInteger(Number(year))) {
+if (!year) {
+  const xmlUrl = 'https://www.govinfo.gov/bulkdata/ECFR/title-27/ECFR-title27.xml';
+
+  fetchXmlDocument(xmlUrl)
+  .then((xml) => parseEcfrXml(xml))
+  .then(() => {
+    checkForUpdatedCfrs(readDirectory('./avas'));
+    checkForUpdatedCfrs(readDirectory('./tbd'));
+    checkForNewCfrs();
+  })
+  .catch(e => console.log(e));
+} else if (year.length === 4 && Number.isInteger(Number(year))) {
   const xmlUrl = `https://www.govinfo.gov/content/pkg/CFR-${year}-title27-vol1/xml/CFR-${year}-title27-vol1-part9-subpartC.xml`;
 
   // readLocalTestFile(year) // for local testing
@@ -100,4 +147,3 @@ if (year && year.length === 4 && Number.isInteger(Number(year))) {
 } else {
   console.log('Four-digit year required -> node index ####');
 }
-
