@@ -107,12 +107,14 @@ function checkForNewCfrs() {
     .forEach(newCfr => console.log('New CFR available for', newCfr, xmlCfrData[newCfr].name));
 }
 
-// for local testing, async required so it can be used below
-// async function readLocalTestFile(year) {
-//   // XML file can be downloaded at
+// for local testing, async required so it can be used below, eventually move this to the unit testing
+// async function readLocalTestFile(filename) {
+//   console.log('Reading local test file...')
+//   // CFR and eCFR XML files can be downloaded at
 //   // https://www.govinfo.gov/app/details/CFR-2018-title27-vol1/CFR-2018-title27-vol1-part9-subpartC
+//   // https://www.govinfo.gov/bulkdata/ECFR/title-27
 //   try {
-//     return fs.readFileSync(`./CFR-${year}-title27-vol1-part9-subpartC.xml`);
+//     return fs.readFileSync(filename);
 //   }
 //   catch(e) {
 //     return Promise.reject('Unable to read file.');
@@ -124,6 +126,7 @@ const year = process.argv[2];
 if (!year) {
   const xmlUrl = 'https://www.govinfo.gov/bulkdata/ECFR/title-27/ECFR-title27.xml';
 
+  // readLocalTestFile('./ECFR-title27.xml') // for local testing
   fetchXmlDocument(xmlUrl)
   .then((xml) => parseEcfrXml(xml))
   .then(() => {
@@ -135,7 +138,7 @@ if (!year) {
 } else if (year.length === 4 && Number.isInteger(Number(year))) {
   const xmlUrl = `https://www.govinfo.gov/content/pkg/CFR-${year}-title27-vol1/xml/CFR-${year}-title27-vol1-part9-subpartC.xml`;
 
-  // readLocalTestFile(year) // for local testing
+  // readLocalTestFile(`./CFR-${year}-title27-vol1-part9-subpartC.xml`) // for local testing
   fetchXmlDocument(xmlUrl)
     .then((xml) => parseXmlDocument(xml))
     .then(() => {
