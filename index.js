@@ -124,8 +124,8 @@ if (!year) {
   // readLocalTestFile('./ECFR-title27.xml') // for local testing
   fetchXmlDocument(xmlUrl)
     .then((xml) => parseXml(xml))
-    .then((eCfr) => extractEcfrAvas(eCfr))
-    .then(() => {
+    .then((eCfr) => {
+      extractEcfrAvas(eCfr);
       checkForUpdatedAvas(readDirectory('./avas'));
       checkForUpdatedAvas(readDirectory('./tbd'));
       checkForNewAvas();
@@ -137,8 +137,8 @@ if (!year) {
   // readLocalTestFile(`./CFR-${year}-title27-vol1-part9-subpartC.xml`) // for local testing
   fetchXmlDocument(xmlUrl)
     .then((xml) => parseXml(xml))
-    .then((cfr) => extractCfrAvas(cfr))
-    .then(() => {
+    .then((cfr) => {
+      extractCfrAvas(cfr);
       checkForUpdatedAvas(readDirectory('./avas'));
       checkForUpdatedAvas(readDirectory('./tbd'));
       checkForNewAvas();
