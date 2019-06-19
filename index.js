@@ -82,7 +82,7 @@ function readDirectory(directoryPath) {
     .map(filename => `${directoryPath}/${filename}`);
 }
 
-function checkForUpdatedCfrs(filenames) {
+function checkForUpdatedAvas(filenames) {
   filenames.forEach(filename => {
     const file = fs.readFileSync(filename); 
     const { cfr_index, name, cfr_revision_history } = JSON.parse(file).features[0].properties;
@@ -96,7 +96,7 @@ function checkForUpdatedCfrs(filenames) {
   }); 
 }
 
-function checkForNewCfrs() {
+function checkForNewAvas() {
   Object.keys(xmlCfrData)
     .filter(cfr => parseInt(cfr.substring(2)) > lastGeoJsonCfr)
     .forEach(newCfr => console.log('New CFR available for', newCfr, xmlCfrData[newCfr].name));
@@ -126,9 +126,9 @@ if (!year) {
     .then((xml) => parseXml(xml))
     .then((eCfr) => extractEcfrAvas(eCfr))
     .then(() => {
-      checkForUpdatedCfrs(readDirectory('./avas'));
-      checkForUpdatedCfrs(readDirectory('./tbd'));
-      checkForNewCfrs();
+      checkForUpdatedAvas(readDirectory('./avas'));
+      checkForUpdatedAvas(readDirectory('./tbd'));
+      checkForNewAvas();
     })
     .catch(e => console.log(e));
 } else if (year.length === 4 && Number.isInteger(Number(year))) {
@@ -139,9 +139,9 @@ if (!year) {
     .then((xml) => parseXml(xml))
     .then((cfr) => extractCfrAvas(cfr))
     .then(() => {
-      checkForUpdatedCfrs(readDirectory('./avas'));
-      checkForUpdatedCfrs(readDirectory('./tbd'));
-      checkForNewCfrs();
+      checkForUpdatedAvas(readDirectory('./avas'));
+      checkForUpdatedAvas(readDirectory('./tbd'));
+      checkForNewAvas();
     })
     .catch(e => console.log(e));
 } else {
