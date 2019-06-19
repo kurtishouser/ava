@@ -76,11 +76,8 @@ function extractCfrAvas(cfr) {
   }
 }
 
-
 function readDirectory(directoryPath) {
-  const filenames = fs.readdirSync(directoryPath);
-
-  return filenames
+  return fs.readdirSync(directoryPath)
     .filter(filename => filename.endsWith('.geojson'))
     .map(filename => `${directoryPath}/${filename}`);
 }
