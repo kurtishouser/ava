@@ -12,7 +12,6 @@ const xmlCfrData = {};
 let lastGeoJsonCfr = 0;
 
 async function fetchXmlDocument(xmlUrl) {
-  console.log('Fetching CFR XML document from govinfo.gov (large file!)...');
   const response = await fetch(xmlUrl);
 
   return response.status === 200
@@ -121,6 +120,7 @@ const year = process.argv[2];
 if (!year) {
   const xmlUrl = 'https://www.govinfo.gov/bulkdata/ECFR/title-27/ECFR-title27.xml';
 
+  console.log('Fetching latest eCFR XML document from govinfo.gov (large file!)...');
   // readLocalTestFile('./ECFR-title27.xml') // for local testing
   fetchXmlDocument(xmlUrl)
     .then((xml) => parseXml(xml))
@@ -134,6 +134,7 @@ if (!year) {
 } else if (year.length === 4 && Number.isInteger(Number(year))) {
   const xmlUrl = `https://www.govinfo.gov/content/pkg/CFR-${year}-title27-vol1/xml/CFR-${year}-title27-vol1-part9-subpartC.xml`;
 
+  console.log(`Fetching ${year} CFR XML document from govinfo.gov (large file!)...`);
   // readLocalTestFile(`./CFR-${year}-title27-vol1-part9-subpartC.xml`) // for local testing
   fetchXmlDocument(xmlUrl)
     .then((xml) => parseXml(xml))
