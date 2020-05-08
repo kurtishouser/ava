@@ -91,6 +91,8 @@ function checkForUpdatedAvas(filenames) {
 
     if (xmlCfrData[cfr_index] && cfr_revision_history != xmlCfrData[cfr_index].cfr_revision_history) {
       console.log('CFR update available for', cfr_index, name,'->', filename);
+      console.log(`  CURRENT: ${cfr_revision_history}`);
+      console.log(`  UPDATED: ${xmlCfrData[cfr_index].cfr_revision_history}`);
     }
   }); 
 }
