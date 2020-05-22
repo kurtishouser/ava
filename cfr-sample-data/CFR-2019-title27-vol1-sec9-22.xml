@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="cfr.xsl"?>
+<CFRGRANULE xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="CFRMergedXML.xsd">
+  <FDSYS>
+    <CFRTITLE>27</CFRTITLE>
+    <CFRTITLETEXT>Alcohol, Tobacco Products and Firearms</CFRTITLETEXT>
+    <VOL>1</VOL>
+    <DATE>2019-04-01</DATE>
+    <ORIGINALDATE>2019-04-01</ORIGINALDATE>
+    <COVERONLY>false</COVERONLY>
+    <TITLE>Augusta.</TITLE>
+    <GRANULENUM>Â§ 9.22</GRANULENUM>
+    <HEADING>Section Â§ 9.22</HEADING>
+    <ANCESTORS>
+      <PARENT HEADING="Title 27" SEQ="4">Alcohol, Tobacco Products and Firearms</PARENT>
+      <PARENT HEADING="CHAPTER I" SEQ="3">ALCOHOL AND TOBACCO TAX AND TRADE BUREAU, DEPARTMENT OF THE TREASURY</PARENT>
+      <PARENT HEADING="SUBCHAPTER A" SEQ="2">ALCOHOL</PARENT>
+      <PARENT HEADING="PART 9" SEQ="1">AMERICAN VITICULTURAL AREAS</PARENT>
+      <PARENT HEADING="Subpart C" SEQ="0">Approved American Viticultural Areas</PARENT>
+    </ANCESTORS>
+  </FDSYS>
+  <SECTION>
+    <SECTNO>§ 9.22</SECTNO>
+    <SUBJECT>Augusta.</SUBJECT>
+    <P>(a) <E T="03">Name.</E> The name of the viticultural area described in this section is “Augusta.”</P>
+    <P>(b) <E T="03">Approved maps.</E> The approved maps for the Augusta viticultural area are two U.S.G.S. maps. They are titled:</P>
+    <P>(1) “Washington East, Missouri”, 7.5 minute quadrangle; and</P>
+    <P>(2) “Labadie, Missouri”, 7.5 minute quadrangle.</P>
+    <P>(c) <E T="03">Boundaries.</E> The boundaries of the Augusta viticultural area are located in the State of Missouri and are as follows:</P>
+    <P>(1) The beginning point of the boundary is the intersection of the St. Charles County line, the Warren County line and the Franklin County line.</P>
+    <P>(2) The western boundary is the St. Charles County-Warren County line from the beginning point to the township line identified on the approved maps as “T45N/T44N.”</P>
+    <P>(3) The northern boundary is the township line “T45N/T44N” from the St. Charles County-Warren County line to the range line identified on the approved maps as “R1E/R2E.”</P>
+    <P>(4) The eastern boundary is the range line “R1E/R2E” from township line “T45N/T44N” extended to the St. Charles County-Franklin County line.</P>
+    <P>(5) The southern boundary is the St. Charles County-Franklin County line from the extension of range line “R1E/R2E” to the beginning point.</P>
+    <CITA>[T.D. ATF-72, 45 FR 41633, June 20, 1980]</CITA>
+  </SECTION>
+</CFRGRANULE>

@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="cfr.xsl"?>
+<CFRGRANULE xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="CFRMergedXML.xsd">
+  <FDSYS>
+    <CFRTITLE>27</CFRTITLE>
+    <CFRTITLETEXT>Alcohol, Tobacco Products and Firearms</CFRTITLETEXT>
+    <VOL>1</VOL>
+    <DATE>2019-04-01</DATE>
+    <ORIGINALDATE>2019-04-01</ORIGINALDATE>
+    <COVERONLY>false</COVERONLY>
+    <TITLE>Chalone.</TITLE>
+    <GRANULENUM>Â§ 9.24</GRANULENUM>
+    <HEADING>Section Â§ 9.24</HEADING>
+    <ANCESTORS>
+      <PARENT HEADING="Title 27" SEQ="4">Alcohol, Tobacco Products and Firearms</PARENT>
+      <PARENT HEADING="CHAPTER I" SEQ="3">ALCOHOL AND TOBACCO TAX AND TRADE BUREAU, DEPARTMENT OF THE TREASURY</PARENT>
+      <PARENT HEADING="SUBCHAPTER A" SEQ="2">ALCOHOL</PARENT>
+      <PARENT HEADING="PART 9" SEQ="1">AMERICAN VITICULTURAL AREAS</PARENT>
+      <PARENT HEADING="Subpart C" SEQ="0">Approved American Viticultural Areas</PARENT>
+    </ANCESTORS>
+  </FDSYS>
+  <SECTION>
+    <SECTNO>§ 9.24</SECTNO>
+    <SUBJECT>Chalone.</SUBJECT>
+    <P>(a) <E T="03">Name</E> The name of the viticultural area described in this section is “Chalone.”</P>
+    <P>(b) <E T="03">Approved maps.</E> The appropriate maps for determining the boundaries of the Chalone viticultural area are four U.S.G.S. 7.5 minute quadrangle maps. They are titled:</P>
+    <P>(1) “Mount Johnson, California, 1968”;</P>
+    <P>(2) “Bickmore Canyon, California, 1968”;</P>
+    <P>(3) “Soledad, California, 1955”; and</P>
+    <P>(4) “North Chalone Peak, California, 1969.”</P>
+    <P>(c) <E T="03">Boundaries.</E> The Chalone viticultural area includes 8640 acres, primarily located in Monterey County, California, with small portions in the north and east located in San Benito County, California. The boundaries of the Chalone viticultural area encompass:</P>
+    <P>(1) Sections 35 and 36, in their entirety, of T.16 S., R.6.E.;</P>
+    <P>(2) Sections 1, 2 and 12, in their entirety, of T.17 S., R.6 E.;</P>
+    <P>(3) Sections 6, 7, 8, 9, 16, and 17, in their entirety, the western half of Section 5, and the eastern half of Section 18 of T.17 S., R.7 E.; and</P>
+    <P>(4) Section 31, in its entirety, and the western half of Section 32 of T.16 S., R.7 E.</P>
+    <CITA>[T.D. ATF-107, 47 FR 25519, June 14, 1982]</CITA>
+  </SECTION>
+</CFRGRANULE>

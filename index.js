@@ -76,9 +76,13 @@ function extractCfrAvas(cfr) {
 }
 
 function readDirectory(directoryPath) {
-  return fs.readdirSync(directoryPath)
-    .filter(filename => filename.endsWith('.geojson'))
-    .map(filename => `${directoryPath}/${filename}`);
+  try {
+    return fs.readdirSync(directoryPath)
+      .filter(filename => filename.endsWith('.geojson'))
+      .map(filename => `${directoryPath}/${filename}`);
+  } catch {
+    return [];
+  }
 }
 
 function checkForUpdatedAvas(filenames) {
