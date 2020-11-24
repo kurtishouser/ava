@@ -7,11 +7,13 @@
   2. Write a comment for your chosen AVA that you are working on the boundary.  Michele will change the status to "In Progress" when she sees the comment.  Add additional comments if any issues or questions arise about this particular AVA.  The issue for [Arroyo Seco](https://github.com/UCDavisLibrary/ava/issues/24) is a good example of the kinds of troubles and questions to track on an issue for an AVA.
 
 ### Resources:
-Hein Online Federal Register Library: http://heinonline.org/HOL/Index?collection=fedreg&set_as_cursor=clear 
+[Hein Online Federal Register Library](http://heinonline.org/HOL/Index?collection=fedreg&set_as_cursor=clear) (UC Davis affiliates may need to log in to the campus VPN to get access)
 
-Wine Institute’s list of documents establishing the original AVA boundaries:	https://www.wineinstitute.org/resources/avas
+[GovInfo](https://www.govinfo.gov/) - free online source for governement documents
 
-Alcohol and Tobacco Tax and Trade Bureau’s (TTB) list of currently established AVAs:	https://www.ttb.gov/wine/us_by_ava.shtml 
+Wine Institute’s list of [documents establishing the original AVA boundaries](https://www.wineinstitute.org/resources/avas)
+
+Alcohol and Tobacco Tax and Trade Bureau’s (TTB) list of [currently established AVAs](https://www.ttb.gov/wine/us_by_ava.shtml)
 
 
 ### Review the available Federal Register document for your AVA of interest  
@@ -115,14 +117,13 @@ Each AVA has a template generated automatically and placed at the centroid of th
 5.	When you are done digitizing, fill out the attribute data based on the text of the official Federal Register documents.  The definitions of the attributes are found in the [README.md file](https://github.com/UCDavisLibrary/ava/blob/master/README.md).  *Note:* Contributors using QGIS 3.x have reported an error saving .geojson files.  It appears as if QGIS does not save changes to geojson files, however changes to files get saved in a file with the extension .geojson.tmp in the same folder as the original .geojson file.  Remove the original .geojson file and change the extension of the .geojson.tmp to simply be .geojson.  Open this file in QGIS to make sure it is readable.  This solution solves the majority of the issues created by this bug.
 6.	Save Layer Edits.
 7.	Toggle Editing off.
-8.	Close QGIS if you’re done making new AVAs, or start over from Step 3e above to make another.
 
 The AVA Project team has made a [Video](https://drive.google.com/open?id=0B9xw97DGLpqAMkNOc05GOGhoZ2M) of the process of digitzing an AVA boundary.
 
 ![alt text](https://github.com/UCDavisLibrary/ava/blob/master/images/Example_AVA_Coombsville.PNG "Example of a completed AVA boundary")
 
 ### Adding Historical AVA Boundaries
-This project currently is only creating the boundaries described in the Issues tab of our repository, however, we anticipate beginning to add historical boundaries in the near future.  This is how we anticipate dealing with those boundaries.
+This project currently is only creating the boundaries described in the Issues tab of our repository, however, we anticipate beginning to add historical boundaries in the near future.  Historical boundaries should be submitted to the history-example branch.  This is how we anticipate dealing with those boundaries.
 
 We will retain our current structure of having one .geojson file for each named AVA.
 
@@ -135,7 +136,7 @@ Within the file for an AVA, we will create polygons for each official boundary r
  
  We will process the data to offer the avas.geojson file with only the current polygons, but the historical boundaries will be available as well.
  
- An example of a completed AVA with historical boundaries can be found in the Redwood Valley AVA boundary in the [history-example Branch](https://github.com/UCDavisLibrary/ava/tree/history-example) of this repository.
+ An example of completed AVAs with historical boundaries can be found in the Redwood Valley and Outer Coastal Plains AVA boundary in the [history-example Branch](https://github.com/UCDavisLibrary/ava/tree/history-example) of this repository.
 
 
 ## Submit your changes to the AVA GitHub Repository
@@ -170,8 +171,3 @@ Another Option: If you want to accept only some of the changes offered in a pull
 1.	QGIS editing geometry manual: http://docs.qgis.org/3.4/en/docs/user_manual/working_with_vector/editing_geometry_attributes.html 
 2.	Understanding the GitHub Flow: https://guides.github.com/introduction/flow/
 3.	USGS Topographic Map Symbols: https://pubs.usgs.gov/gip/TopographicMapSymbols/topomapsymbols.pdf 
-
------------------------------------------------------------------------------------------------------
-Considerations for post-processing:
-1.	Densify the lines for areas with large distances between points so when people re-project the file it won’t distort.
-
