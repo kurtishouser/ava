@@ -46,13 +46,13 @@ University entities (departments, labs, research groups, etc.) or other organiza
 
 identifier | type | description | example
 ---| --- | --- | ---
-ava_id | text | an identification string prescribed in the Issue for each AVA |	leona_valley
-name | text | the legal name given to the AVA |	Leona Valley
+ava_id | text | a unique identifier for each AVA polygon |	leona_valley
+name | text | the legal name given to the AVA; an identifier for each AVA |	Leona Valley
 aka	| text | (optional) other names, including historical names, and terms used for the AVA | |
 created	| date | YYYY-MM-DD format; the date of the first publication creating the AVA | 2017-06-01 |
 removed	| date | (optional) the date the AVA designation was removed from an area |
-county | text | the county, or list of counties separated by a comma, in which the AVA exists |	Los Angeles, Ventura
-state	| text | the state, or list of states separated by a comma, using the two-letter postal abbreviation, in which the AVA exists | CA, NV
+county | text | the county, or list of counties separated by a pipe, in which the AVA exists |	Los Angeles&#124;Ventura
+state	| text | the state, or list of states separated by a pipe, using the two-letter postal abbreviation, in which the AVA exists | CA&#124;NV
 within	| text | (if applicable) used for smaller AVAs that fit inside of larger AVAs; the larger AVA that this AVA sits inside | 
 contains	| text | (if applicable) used for larger AVAs that contain smaller AVAs; the smaller AVAs that fit inside this AVA |
 petitioner	| text | the name of the person who initiated the petition and their affiliation separated by a comma | Jane Smith, Smith Family Wineries
@@ -104,7 +104,9 @@ Version 1.0 will be released once all of the AVAs in California are completed an
 
 [Soo Min Hur](https://github.com/SoominHur) (Student Employee, Data Management Program, November 2018 - June 2019)
 
-[David Li](https://github.com/davidkli) (Student Employee, DataLab, starting October 2019)
+[David Li](https://github.com/davidkli) (Student Employee, DataLab, October 2019 - July 2020)
+
+[Elijah Stockwell](https://github.com/elistockwell) (Student Employee, DataLab, Starting October 2020)
 
 **Consultants:**
 
@@ -156,11 +158,13 @@ Timothy Kwong (Undergraduate; Collaboratory Staff)
 
 # Awards, Publications, & Projects Using Our Data
 
-2018 [Sautter Award](https://www.ucop.edu/information-technology-services/initiatives/sautter-award-program/award-winners-and-applications/2018.html) - Silver - for Innovation in Information Technologies, awarded by the University of California Office of the President.
+Tobias, M.M. & C.C. Myles. 2021. "Wine, culture, and environment: A study of the Sierra (Nevada) Foothills American Viticultural Area" in *Handbook of Wine and Culture*, Tim Unwin, ed. Routledge. (In progress)
+
+Cantu, et al. 2021. [Investigating the impact of regionality on the sensorial and chemical aging characteristics of Pinot noir grown throughout the U.S. West coast.](https://www.sciencedirect.com/science/article/abs/pii/S030881462031582X).  *Food Chemistry* 337(2021).
 
 Myles, C.C., M.M. Tobias, & I. McKinnon. 2020. “‘A big fish in a small pond’: How Arizona wine country was made” in [*Agritourism, Wine Tourism, Craft Beer Tourism: Local Responses to peripherality through tourism niches.*](https://www.routledge.com/Agritourism-Wine-Tourism-and-Craft-Beer-Tourism-Local-Responses-to-Peripherality/Pezzi-Faggian-Reid/p/book/9781138614413)  Maria Giulia Pezzi (GSSI), Alessandra Faggian (GSSI), Neil Reid (University of Toledo, OH), eds.
 
-Cantu, et al. 2021. [Investigating the impact of regionality on the sensorial and chemical aging characteristics of Pinot noir grown throughout the U.S. West coast.](https://www.sciencedirect.com/science/article/abs/pii/S030881462031582X).  *Food Chemistry* 337(2021).
+2018 [Sautter Award](https://www.ucop.edu/information-technology-services/initiatives/sautter-award-program/award-winners-and-applications/2018.html) - Silver - for Innovation in Information Technologies, awarded by the University of California Office of the President.
 
 Bizou Wine's ["Mapping Our Wines"](http://www.bizouwines.com/mapping-our-wines)
 
