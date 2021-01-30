@@ -1,3 +1,4 @@
+const { log } = require('console');
 const fs = require('fs');
 const fetch = require('node-fetch');
 const xml2js = require('xml2js');
@@ -87,8 +88,16 @@ function readDirectory(directoryPath) {
 
 function checkForUpdatedAvas(filenames) {
   filenames.forEach(filename => {
-    const file = fs.readFileSync(filename); 
-    const { cfr_index, name, cfr_revision_history } = JSON.parse(file).features[0].properties;
+    const file = fs.readFileSync(filename);
+    // alternate method to find the current boundaries, keep for now
+    // const [ currentFeature ] = JSON.parse(file).features.filter(feature =>
+    //   !feature.properties.valid_end || // handles null and '' in the datatset
+    //   feature.properties.valid_end === 'N/A'); // dirty data
+    const features = JSON.parse(file).features;
+    const [ currentFeature ] = features.length === 1
+      ? features
+      : JSON.parse(file).features.sort((a, b) => a.properties.ava_id > b.properties.ava_id ? 1 : - 1);
+    const { cfr_index, name, cfr_revision_history } = currentFeature.properties;
     const currentCfr = parseInt(cfr_index.substring(2));
 
     if (currentCfr > lastGeoJsonCfr) lastGeoJsonCfr = currentCfr;
